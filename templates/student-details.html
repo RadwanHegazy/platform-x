@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{ student.name }}  </title>
+    <link rel="stylesheet" href="{% static 'css/student.css' %}">
+</head>
+<body>
+
+    
+    <style>
+        .marks .main{
+            padding-left: 0;
+        }
+    </style>
+
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+    
+    <div class="container">
+
+        <div class="up">
+            
+            <div class="in">
+                <small>اسم الطالب</small>
+                <input type="text" value="{{student.name}}" readonly>
+            </div>
+            
+            <div class="in">
+                <small>رقم ولي الامر</small>
+                <input type="text" id="parent_phone" value="{{student.parent_phone}}" readonly>
+            </div>
+
+            <div class="in">
+                <small>الصف الدراسي</small>
+                <input type="text" value="{{student.level}}" readonly>
+            </div>
+       
+            <div class="in">
+                <small>اظهار</small>
+                <select name="" id="">
+                    <option selected value="بيانات الدفع">بيانات الدفع</option>
+                    <option value="درجات الطالب">درجات الطالب</option>
+                </select>
+            </div>
+
+        </div>
+        
+        <div class="down">
+            
+            <div class="paid">
+                
+                <div class="main">
+                    <p>الشهر</p>
+                    <p>الحالة</p>
+                </div>
+                {% for month in months %}
+                    {% if month.is_paid %}
+                        <div class="months ok">
+                            <p>{{month.name}}</p>
+                            <p>تم الدفع في : {{month.paid_date|date:"SHORT_DATE_FORMAT"}}</p>
+                        </div>
+                    {% else %}
+                        <div class="months">
+                            <p>{{month.name}}</p>
+                            <p>لم يتم الدفع</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="marks">
+                
+                
+                <div class="main">
+                    <p>امتحان بتاريخ</p>
+                    <p>درجة الطالب</p>
+                    <p>الدرجة النهائية</p>
+                </div>
+
+                {% for result in results %}
+                    <div class="main student-marks">
+                        <p>{{result.exam.date|date:"SHORT_DATE_FORMAT"}}</p>
+                        <p>{{result.mark}}</p>
+                        <p>{{result.exam.final_mark}}</p>
+                    </div>
+                {% endfor %}
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    
+    <div class="overlay">
+
+        <span>
+            <p>هل حقا تريد حذف المستخدم</p>
+            <div class="btns">
+                <a href="#">حذف</a>
+                <a href="#" class="exit">الغاء</a>
+            </div>
+        </span>
+    </div>
+
+
+    <script>
+
+        document.querySelector('select').addEventListener('change',function(){
+            document.querySelector('.down').classList.toggle('marks');
+        })
+        
+
+        var phone_url = document.getElementById('parent_phone');
+        var val = phone_url.value;
+        var phone = `${val.split('/')[val.split('/').length - 1]}`.replace('+20','');
+        
+        phone_url.value = phone;
+
+    </script>
+
+
+    
+</body>
+</html>

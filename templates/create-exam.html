@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> تجميع درحات  </title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="{% static 'css/add-student.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <style>
+        .container {
+            padding: 3rem 2rem;
+        }
+
+    </style>
+    
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+
+    <form method="POST" class="container">
+        
+        {% csrf_token %}
+        <select name="level" >
+            {% for level in levels %}
+                <option value="{{level}}">{{level}}</option>
+            {% endfor %}
+        </select>
+        
+        <div class="in">
+            <small>الدرجة الكلية</small>
+            <input type="text" name="final_mark">
+        </div>
+
+
+
+        <div class="btns">
+            <button type="submit">انشاء</button>
+            <a href="{% url 'exams' %}">جميع الاختبارات</a>
+        </div>
+        
+    </form>
+
+</body>
+</html>

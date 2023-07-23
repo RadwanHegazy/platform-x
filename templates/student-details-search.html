@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بحث عن بيانات الطالب </title>
+    <link rel="stylesheet" href="{% static 'css/add-student.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        button {
+            width: 100%;
+            padding: 1rem 1.3rem;
+            margin-top: 25px;
+        }
+
+        .msg {
+            background-color: rgba(255, 255, 0, 0.342);
+            border-color: yellow;
+        }
+    </style>
+
+
+</head>
+<body>
+    
+    <img src="{% static 'images/bg.png' %}" alt="Ramadan Abdelaty ,Chemistry Teacher" class="bg">
+
+    <form method="POST" class="container">
+        
+        {% csrf_token %}
+
+        {% for msg in messages  %}
+            <div class="msg">
+                <i class="fas fa-xmark"></i>
+                <p>{{msg}}</p>
+            </div>
+        {% endfor %}
+
+        <div class="user">
+            <img src="{% static 'images/user.png' %}" alt="">
+        </div>
+
+        <div class="form">
+            
+            <div class="in">
+                <small>كود الطالب</small>
+                <input type="number" required name="code">
+            </div>
+            
+            
+        </div>
+
+        <button type="submit">بحث</button>
+
+
+    </form>
+
+</body>
+</html>

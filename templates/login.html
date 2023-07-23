@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> تسجيل الدخول </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    
+    <img src="{% static 'images/bg.png' %}" alt="Ramadan Abdelaty ,Chemistry Teacher" class="bg">
+
+    <form method="POST" class="container">
+        {% csrf_token %}
+        <div class="form">
+            <div class="in">
+                <small>اسم المستخدم</small>
+                <input type="text" name="username">
+            </div>
+            
+            <div class="in">
+                <small>كلمة المرور</small>
+                <input type="password" name="password">
+            </div>
+        </div>
+
+        <div class="btns" style="gap: 10px;">
+            <button type="submit">دخول</button>
+            <!-- <a href="{% url 'student_search' %}">بيانات الطالب</a>
+            <a href="{% url 'exams' %}" style="background-color: rgb(171, 8, 212);">الاختبارات</a> -->
+        </div>
+
+
+    </form>
+
+
+    <script>
+        if ("{{msg}}"){
+            alert("{{msg}}")
+        }
+    </script>
+</body>
+</html>

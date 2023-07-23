@@ -1,0 +1,166 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.container {
+    backdrop-filter: blur(33px);
+    width: 500px;
+    height: auto;
+    border-radius: 20px;
+    z-index: 2;
+    box-shadow: 0px 0px 31px #00000050;
+    position: relative;
+    /* padding: 10rem 2rem;
+    padding-bottom: 3rem; */
+    padding: 1rem;
+}
+
+.container .user {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    padding: 7px;
+    /* background-color: #ffffff02; */
+    backdrop-filter: blur(33px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.user h1 {
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 25px;
+}
+
+.container .user img {
+    width: 100px;
+    height: auto;
+    scale: 1.0;
+    filter: drop-shadow(0px 0px 21px #ffffff50);
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.in {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+    backdrop-filter: blur(13px);
+    background-color: #ffffff07;
+    height: 80px;
+    padding: 0.5rem  1rem;
+    font-family: Cairo,sans-serif;
+    border-radius: 20px;
+}
+
+.in small {
+    color: #888;
+    font-weight: bold;
+}
+
+.in input {
+    display: flex;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    font-family: Cairo,sans-serif;
+    outline: none;
+    color: #fff;
+    font-size: 18px;
+}
+
+.container button , .btns a{
+    color: #fff;
+    border: none;
+    outline: none;
+    font-family: Cairo,sans-serif;
+    background-color: #31CF1A;
+    border-radius: 20px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+.btns {
+    display: flex;
+    width: 100%;
+    height: auto;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.btns a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: rgb(22, 130, 202);
+}
+
+.btns button, .btns a{
+    width: 100%;
+    height: 45px;
+}
+
+
+
+ @media (max-width:500px) {
+    .container{
+        width: 95%;
+        border-radius: 30px;
+        padding-top: 60px;
+    }
+
+    .in {
+        height: 80px;
+    }
+
+    .container button , .btns a{
+        font-size: 15px;
+        height: 45px;
+    }
+
+    .user h1 {
+        font-size: 15px;
+    }
+} 
+
+@media (max-width:400px) {
+    .btns {
+        gap: 1px;
+    }
+
+}

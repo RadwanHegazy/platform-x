@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> انشاء حساب مدرس</title>
+    <link rel="stylesheet" href="{% static 'css/register-teacher.css' %}">
+
+</head>
+<body>
+    
+    
+    <img src="{% static 'images/bg.svg' %}" alt="" class="bg">
+
+    <form method="POST" class="container" enctype="multipart/form-data">
+        {% for msg in messages %}
+            <div class="msg">
+                {{msg}}
+            </div>
+        {% endfor %}
+        {% csrf_token %}
+        <div class="in image">
+            <input type="file" id="image-input" name="image" hidden>
+            <div class="img-container">
+                <img src="{% static 'images/default.png' %}" id="teacher-img" alt="">
+            </div>
+            <button id="change-image" type="button">تغير الصورة</button>
+        </div>
+
+        <div class="in inputs">
+            <input name="name" required type="text" placeholder="اسم المدرس">
+            <input name="wa_number" required type="number" placeholder="رقم الواتس">
+            <input name="subject" required type="text" placeholder="المادة المراد تدريسها">
+        </div>
+
+        <div class="btns">
+
+            <button type="submit">انشاء حساب</button>
+
+            <div class="already">
+                <p>هل لديك حساب بالفعل ؟</p>
+                <a href="{% url 'login' %}">تسجيل الدخول</a>
+            </div>
+
+        </div>
+
+    </form>
+
+
+
+    <script>
+
+        var imgFile = document.querySelector('.in.image > input');
+        var imgBtn = document.querySelector('#change-image');
+        var imgView = document.querySelector('.in.image img');
+
+        imgBtn.addEventListener('click',function(){
+            imgFile.click()
+        })
+
+        imgFile.addEventListener('change',function(e){
+            imgView.src = URL.createObjectURL(e.target.files[0]);
+        })
+
+    </script>
+
+</body>
+</html>

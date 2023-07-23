@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{ student.name }}  </title>
+    <link rel="stylesheet" href="{% static 'css/student.css' %}">
+</head>
+<body>
+
+
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+    
+    <div class="container">
+
+        <form method="POST" class="up" action="{% url 'edit_student_data' student.student_uuid %}">
+            
+            {% csrf_token %}
+            
+            <div class="in">
+                <small>اسم الطالب</small>
+                <input type="text" name="name" value="{{student.name}}" >
+            </div>
+            
+            <div class="in" id="wb">
+                <small><a href="{{student.parent_phone}}" style="color: #1044a5;"  target="_blank">واتس ولي الامر</a></small>
+                <input type="text" value="{{student.parent_phone}}" name="parent_phone" id="parent_phone" >
+            </div>
+
+            <div class="in">
+                <small>الصف الدراسي </small>
+                <select name="level">
+                    {% for level in levels %}
+                        {% if level == student.level %}
+                            <option value="{{level}}" selected>{{level}}</option>
+                        {% else %}
+                            <option value="{{level}}">{{level}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+       
+            <div class="in">
+                <small>اظهار</small>
+                <select name="" id="changer">
+                    <option selected value="بيانات الدفع">بيانات الدفع</option>
+                    <option value="درجات الطالب">درجات الطالب</option>
+                </select>
+            </div>
+
+            <button type="submit" class="edit">حفظ التعديلات</button>
+            <a href="#" class="delete">حذف</a>
+
+        </form>
+        
+        <div class="down">
+            
+            <div class="paid">
+                
+                <div class="main">
+                    <p>الشهر</p>
+                    <p>الحالة</p>
+                </div>
+
+                {% for m in months %}
+                    {% if m.is_paid %}
+                        <div class="months ok">
+                            <p>{{m.name}}</p>
+                            <p>تم الدفع في : {{m.paid_date|date:"SHORT_DATE_FORMAT"}}</p>
+                        </div> 
+                        {% else %}
+                        <div class="months">
+                            <p>{{m.name}}</p>
+                            <p><a href="?paid={{m.id}}">دفع</a></p>
+                        </div>        
+                    {% endif %}
+                {% endfor %}
+                
+            </div>
+
+            <div class="marks">
+                
+                
+                <div class="main">
+                    <p>امتحان بتاريخ </p>
+                    <p>درجة الطالب</p>
+                    <p>الدرجة النهائية</p>
+                </div>
+
+                <form method="POST" class="add">
+                    {% csrf_token %}
+
+                    <p>{{current_date|date:"SHORT_DATE_FORMAT"}}</p>
+                    <div class="text">
+                        <input type="text" name="student_mark">
+                    </div>
+                    <div class="text">
+                        <input type="text" name="final_mark">
+                    </div>
+                    
+                    <button type="submit">حفظ</button>
+
+                </form>
+
+                {% for result in results %}
+
+                    <div class="main student-marks">
+                        <p>{{ result.exam.date|date:"SHORT_DATE_FORMAT" }}</p>
+                        <p>{{ result.mark }}</p>
+                        <p>{{ result.exam.final_mark }}</p>
+                    </div>
+                
+                {% endfor %}
+
+
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    
+    <div class="overlay">
+
+        <span>
+            <p>هل حقا تريد حذف المستخدم</p>
+            <div class="btns">
+                <a href="?del={{student.student_uuid}}">حذف</a>
+                <a href="#" class="exit">الغاء</a>
+            </div>
+        </span>
+        
+    </div>
+
+
+    <script>
+        document.querySelector('#changer').addEventListener('change',function(){
+            document.querySelector('.down').classList.toggle('marks');
+        })
+
+        var overlay = document.querySelector('.overlay');
+        var cancel = document.querySelector('.exit');
+        var del = document.querySelector('.delete');
+
+        del.addEventListener('click',function(){
+            overlay.classList.add('view')
+        })
+
+        cancel.addEventListener('click',function(){
+            overlay.classList.remove('view')
+        })
+
+
+        var phone_url = document.getElementById('parent_phone');
+        var val = phone_url.value;
+        var phone = `${val.split('/')[val.split('/').length - 1]}`.replace('+20','');
+        
+        phone_url.value = phone;
+
+    </script>
+</body>
+</html>

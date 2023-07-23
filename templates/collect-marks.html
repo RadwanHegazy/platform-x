@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> تجميع درجات الاختبارات </title>
+    <link rel="stylesheet" href="{% static 'css/exam-results.css' %}">
+</head>
+<body>
+    
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+    
+
+    <form class="container" method="POST">
+
+        {% csrf_token %}
+
+        {% for msg in messages  %}
+            <script>
+                alert("{{msg}}")
+            </script>
+        {% endfor %}
+        <div class="up">
+
+        
+            
+            <div class="in" >
+                <select name="level" required id="">
+                    {% for level in levels %}
+                        {% if level == current_level %}
+                            <option value="{{level}}" selected>{{level}}</option>
+                        {% else %}
+                            <option value="{{level}}">{{level}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <div class="in">
+                <input type="number" value="{{range}}" required name="exam_range" placeholder="كم امتحان تريد">
+            </div>
+        
+            <div class="in">
+                <button class="done-btn" type="submit">بحث</button>
+            </div>
+            <div class="in">
+                <a href="{% url 'home' %}" class="done-btn" style="text-decoration: none;display: flex;justify-content: center;align-items: center;background-color: green;" >الرئيسية</a>
+            </div>
+
+
+        </div>
+        
+        
+        <div class="down">
+            
+            <div class="main">
+                <p>اسم الطالب</p>
+                <p>الدرجة</p>
+            </div>
+
+            {% for student in students %}
+                <div class="user">
+                    <p>{{student.name}} </p>
+                    <p>{{student.mark}}</p>
+                </div>
+            {% endfor %}
+
+            <!-- {% if results %}
+                {% for result in results %}
+                    <div class="user" data-usercode="{{result.student.code}}" id="{{result.student.id}}" >
+                        <p>{{ result.student.name }}</p>
+                        <p>{{ result.student.code }}</p>
+                        <p><input type="text" class="mark" value="{{result.mark}}"> / <input type="text" readonly value="{{exam.final_mark}}" class="finalM"></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% for student in students %}
+                    <div class="user" data-usercode="{{student.code}}" id="{{student.id}}" >
+                        <p>{{ student.name }}</p>
+                        <p>{{ student.code }}</p>
+                        <p><input type="text" class="mark" value=""> / <input type="text" readonly value="{{exam.final_mark}}" class="finalM"></p>
+                    </div>
+                {% endfor %}
+            {% endif %} -->
+
+        </div>
+
+
+    </form>
+
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform X</title>
+    <link rel="stylesheet" href="{% static 'css/landing-page.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    
+
+
+    <div class="home">
+        <img src="{% static 'images/bg.svg' %}" alt="" class="bg">
+        <div class="text">
+            <p>مرحبا بك  في </p>
+            <h1>PlatformX</h1>
+            <p>المكان الأنسب والأفضل لادراة دروسك</p> 
+            <div class="btns">
+                <a href="{% url 'teacher_register' %}">انشاء حساب</a>
+                <a href="{% url 'login' %}">تسجيل الدخول</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="how-to">
+        <h1>كيفية الاستخدام</h1>
+        
+        <div class="boxes">
+            
+            <div class="box">
+                <small>1</small>
+                <p>انشئ حسابك</p>
+            </div>
+            <div class="box">
+                <small>2</small>
+                <p>ادخل الموقع</p>
+            </div>
+            <div class="box">
+                <small>3</small>
+                <p>ابدأ رحلتك معنا </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="sperator"></div>
+
+
+    <div class="futures">
+        <h1>مميزات المنصة</h1>
+        
+        <div class="boxes">
+    
+            <div class="box">
+                <i class="fas fa-smile"></i>
+                <p>سهولة الاستخدام</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-user"></i>
+                <p>إضافة او تعديل او حذف طالب</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-database"></i>
+                <p>صفحة بيانات لكل طالب</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-question"></i>
+                <p>صفحة اختبارات لجميع المرحل</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-hand-point-up"></i>
+                <p>اضافة درجات الاختبار لكل الطالب</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-marker"></i>
+                <p>الاستعلام عن درجات الطلاب او لطالب معين</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-sack-dollar"></i>
+                <p>عرض جميع الشهور التي تم دفعها لكل طالب</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-upload"></i>
+                <p>خدمات رفع الموقع مجانية </p>
+            </div>
+            <div class="box">
+                <i class="fas fa-user-edit"></i>
+                <p>تسجيل الطالب لبياناتة عن طريق الفورم</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-search"></i>
+                <p>بحث عن الطالب عن طريق الكود او الاسم</p>
+            </div>
+            <div class="box">
+                <i class="fas fa-plus-circle"></i>
+                <p>سجل لمعرفة المزيد</p>
+            </div>
+
+
+        </div>
+    
+    
+    </div>
+
+
+    <footer>
+        <p>تم الانشاء و التصميم بواسطة رضوان جابر حجازي</p>
+    </footer>
+
+    
+    
+</body>
+</html>

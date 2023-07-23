@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Home </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+
+    <div class="up-bar">
+        <div class="image">
+            <img src="{% static 'images/user.png' %}" alt="">
+        </div>
+        <h1>Mr.Mohammed Mansour</h1>
+    </div>
+
+    <div class="container">
+
+        <form method="GET" class="options">
+
+            <select name="level" >
+                <option value="all">الكل</option>
+                {% for level in levels %}
+                    {% if level == current_level %}
+                            <option value="{{level}}" selected>{{level}}</option>
+                        {% else %}
+                            <option value="{{level}}">{{level}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            
+            <select name="select_month" id="">
+                {% for m in months_list %}
+                    {% if m == current_month %}
+                        <option value="{{m}}" selected>شهر {{m}} </option>
+                    {% else %}
+                        <option value="{{m}}">شهر {{m}} </option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+            <div class="in">
+                <input type="text" name="search" placeholder="بحث">
+                <button type="submit">بحث</button>
+            </div>
+
+            <div class="btns">
+                <a href="{% url 'change_password' %}" class="change-pas">تغير كلمة المرور</a>
+                <a href="{% url 'create_exam' %}" class="change-pas">الاختبارات</a>
+                <a href="{% url 'student_register' %}" class="change-pas">صفحة التسجيل</a>
+                <a href="{% url 'collect_marks' %}" class="change-pas">تجميع درجات</a>
+            </div>
+        
+        </form>
+
+        <div class="info">
+            
+
+
+    <table class="customers">
+    <tr>
+        <th> <a href="{% url 'add_student' %}">اضافة طالب</a></th>
+        <th>دفع شهر {{current_month}}</th>
+        <th>الكود</th>
+        <th>الصف الدراسي</th>
+        <th>اسم الطالب</th>
+    </tr>
+
+    {% for student in students %}
+        <tr>
+            <td>  
+                <div class="setting">
+                    <a href="?delete={{student.student_uuid}}" class="fas fa-trash"></a>
+                    <a href="{% url 'edit_student' student.student_uuid  %}" class="fas fa-edit"></a>
+                </div>
+            </td>
+            
+            <td>
+                
+                {% for month in months %}
+                    {% if month.name == current_month and student == month.student %}
+                        {% if month.is_paid %}
+                            <p class="paid yes"><small class="fas fa-check"></small></p>
+                        {% else %}
+                            <p class="paid no"><small class="fas fa-xmark"></small></p>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+            </td>
+            
+            <td>{{student.code}}</td>
+            
+            <td>{{student.level}}</td>
+            
+            <td>{{student.name}}</td>
+        </tr>
+
+    {% endfor %}
+
+    
+  </table>
+
+       
+
+
+
+  </div>
+        
+        {% if students.has_other_pages %}
+        <ul class="pagination">
+          {% if students.has_previous %}
+            <li><a href="?page={{ students.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+          {% endif %}
+          {% for i in students.paginator.page_range %}
+            {% if students.number == i %}
+              <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+              <li><a href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if students.has_next %}
+            <li><a href="?page={{ students.next_page_number }}">&raquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+          {% endif %}
+        </ul>
+      {% endif %}
+
+    </div>  
+
+    <script>
+        document.querySelectorAll('select').forEach( selected =>{
+            selected.addEventListener('change',function(){
+                document.querySelector('form').submit()
+            })
+        })
+    </script>
+
+</body>
+</html>

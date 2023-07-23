@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> اختبار | {{exam.level}} </title>
+    <link rel="stylesheet" href="{% static 'css/exam-results.css' %}">
+</head>
+<body>
+    
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+    
+    <form class="container" method="POST">
+
+        <div class="up">
+
+            <div class="search">
+                <input type="text" class="stCode" placeholder="كود الطالب">
+                <button class="s" type="button">بحث</button>
+            </div>
+        
+        </div>
+        
+        
+        <div class="down">
+            
+            <div class="main">
+                <p>اسم الطالب</p>
+                <p>الكود</p>
+                <p>الدرجة</p>
+            </div>
+
+            {% if results %}
+                {% for result in results %}
+                    <div class="user" data-usercode="{{result.student.code}}" id="{{result.student.id}}" >
+                        <p>{{ result.student.name }}</p>
+                        <p>{{ result.student.code }}</p>
+                        <p><input readonly type="text" class="mark" value="{{result.mark}}"> / <input type="text" readonly value="{{exam.final_mark}}" class="finalM"></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% for student in students %}
+                    <div class="user" data-usercode="{{student.code}}" id="{{student.id}}" >
+                        <p>{{ student.name }}</p>
+                        <p>{{ student.code }}</p>
+                        <p><input readonly type="text" class="mark" value=""> / <input type="text" readonly value="{{exam.final_mark}}" class="finalM"></p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+
+
+
+
+    </form>
+
+
+    <script>
+        
+        //search for by code
+        var code = document.querySelector('.stCode');
+        var searchBtn = document.querySelector('.s')
+        var users = document.querySelectorAll('.user');
+
+        searchBtn.addEventListener('click',function(){
+            if (code.value){
+                users.forEach( user=>{
+                    if (user.dataset.usercode != code.value){
+                        user.style.display = 'none'
+                    }else{
+                        user.style.display = 'flex'
+                    }
+                })
+            
+            }else{
+                users.forEach( user=>{
+                    user.style.display = 'flex'
+                })
+            }
+        })
+
+        
+
+
+        
+    </script>
+
+</body>
+</html>

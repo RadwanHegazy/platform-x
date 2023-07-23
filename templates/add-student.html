@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> اضافة طالب  </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/add-student.css' %}">
+</head>
+<body>
+
+
+
+    <style>
+
+        .btns {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .btns button, .btns a {
+            flex: 1;
+        }
+
+        .btns a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            background-color: rgb(16, 84, 211);
+            height: 100%;
+            text-decoration: none;
+            font-family: Cairo,sans-serif;
+            border-radius: 12px;
+        }
+    </style>
+    
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+
+    <form class="container" method="POST">
+        
+        {% csrf_token %}
+
+        {% for msg in messages  %}
+            <div class="msg">
+                <i class="fas fa-xmark"></i>
+                <p>{{msg}}</p>
+            </div>
+        {% endfor %}
+
+        <div class="in">
+            <small>اسم الطالب</small>
+            <input type="text" name="name">
+        </div>
+        <div class="in">
+            <small>كود الطالب ( اختياري ) </small>
+            <input type="text" name="code">
+        </div>
+
+        <div class="in">
+            <small>رقم هاتف ولي الامر</small>
+            <input type="text" name="parent_phone">
+        </div>
+
+        <select name="level" >
+            {% for level in levels %}
+                <option value="{{level}}">{{level}}</option>
+            {% endfor %}
+        </select>
+
+
+        <div class="btns">
+            <button type="submit">حفظ</button>
+            <a href="{% url 'home' %}">الرجوع</a>
+        </div>
+        
+    </form>
+
+    <script>
+        
+        var msg = document.querySelector('.msg');
+        var i = msg.querySelector('i');
+
+        i.addEventListener('click',function(){
+            msg.remove()
+        })
+
+        
+    </script>
+
+</body>
+</html>

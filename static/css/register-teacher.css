@@ -1,0 +1,157 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    max-height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+body .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    object-fit: cover;
+}
+
+.msg {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Cairo,sans-serif;
+    color: #fff;
+    background-color: #31CF1A50;
+    border: 1px solid #31CF1A;
+    position: relative;
+    text-align: center;
+    border-radius: 12px;
+    font-size: 15px;
+}
+
+.container {
+    width: 450px;
+    /* height: 600px; */
+    background-color: #ffffff10;
+    border-radius: 44px;
+    backdrop-filter: blur(22px);
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+
+
+
+.in.image {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.in.image .img-container {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.img-container img {
+    width: 100%;
+    height: auto;
+}
+
+
+.in.image button {
+    width: 100px;
+    padding: 7px 12px;
+    font-family: Cairo,sans-serif;
+    color: #fff;
+    background-color: rgb(27, 86, 223);
+    border: none;
+    outline: none;
+}
+
+
+
+.in.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.in.inputs input {
+    height: 60px;
+    direction: rtl;
+    padding: 7px 12px;
+    font-family: Cairo,sans-serif;
+    background-color: #ffffff10;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 8px;
+}
+
+
+.btns {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 50px;
+}
+
+
+.btns button, .btns .already {
+    height: 100%;
+    font-family: Cairo,sans-serif;
+}
+
+.already {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.btns button {
+    width: 100px;
+    background-color: green;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+.already p {
+    color: #ccc;
+}
+
+
+.already a {
+    color: rgb(17, 120, 255);
+}
