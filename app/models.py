@@ -46,12 +46,14 @@ class Student (models.Model) :
         code = info['code']
         parent_phone = info['parent_phone']
         level = info['level']
+        teacher = info['teacher']
 
         st = Student.objects.create(
             name = name,
             code = code,
             parent_phone = f'https://wa.me/+20' + f'{parent_phone}',
             level = level,
+            teacher = teacher,
             student_uuid = uuid.uuid4()
         )
 

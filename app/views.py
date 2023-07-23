@@ -51,6 +51,8 @@ def home (request) :
     if request.user.is_authenticated == False :
         return render(request,'platform-x/landing-page.html')
 
+
+    teacher = Teacher.objects.get(user=request.user)
     # getNames = pd.read_excel('app/data.xlsx',usecols='A')
     # getCodes = pd.read_excel('app/data.xlsx',usecols='B')
     
@@ -82,7 +84,7 @@ def home (request) :
         st.first().delete()
         return redirect('home')
 
-    students = Student.objects.all()
+    students = Student.objects.filter()
     current_month = datetime.datetime.now().month
     
     months_list = [
@@ -120,8 +122,9 @@ def home (request) :
             except :
                 context['students'] = Student.objects.filter(name__icontains = query)
 
-
     page = request.GET.get('page', 1)
+
+    context['students'] = context['students'].filter(teacher=teacher)
 
     paginator = Paginator(context['students'], 25)
     try:
@@ -132,6 +135,8 @@ def home (request) :
         students = paginator.page(paginator.num_pages)
 
     context['students'] = students
+    context['teacher'] = teacher
+
 
 
     return render(request,'home.html',context)
@@ -203,6 +208,7 @@ def add_Student (request) :
         parent_phone = request.POST['parent_phone']
         level = request.POST['level']
         
+        
 
         if code == '' :
 
@@ -218,8 +224,10 @@ def add_Student (request) :
             name = name,
             code = code,
             parent_phone = parent_phone,
-            level = level
+            level = level,
+            teacher = Teacher.objects.get(user=request.user)
         )
+
 
         messages.success(request,'تمت اضافة الطالب بنجاح')
         
@@ -334,10 +342,12 @@ def create_exam(request) :
     return render(request,'create-exam.html')
 
 
-def exam_results (request,examid) :
+def exam_results (request,examid,teacher_uuid) :
     
+    teacher = get_object_or_404(Teacher, teacher_uuid = teacher_uuid)
     exam = get_object_or_404(Exam, id = examid)
-    students = Student.objects.filter(level = exam.level )
+
+    students = Student.objects.filter(level = exam.level , teacher = teacher)
     
     if students.count() != Result.objects.filter(exam=exam).count() :
         for st in students :
@@ -354,34 +364,36 @@ def exam_results (request,examid) :
         
 
         
-    if request.method == "POST" :
-        
-        students_ids = str(request.POST['ids']).split('&')
-        students_results = str(request.POST['results']).split('&')
-
-
-        for i in range(len(students_ids)) :
-            if students_ids[i] :
-                st = Student.objects.get(id = students_ids[i])
-                result = students_results[i]
-                if Result.objects.filter(student = st, exam = exam, mark = result).exists() == False :
-                    
-                    if int(result) <= int(exam.final_mark) :
-                        res = Result.objects.get(
-                            student = st ,
-                            exam = exam,
-                        )
-
-                        res.mark = result
-
-                        res.save()
-                    
-
-        
-        return redirect('exam_results',examid)
 
 
     if request.user.is_authenticated:
+
+        if request.method == "POST" :
+            
+            students_ids = str(request.POST['ids']).split('&')
+            students_results = str(request.POST['results']).split('&')
+
+
+            for i in range(len(students_ids)) :
+                if students_ids[i] :
+                    st = Student.objects.get(id = students_ids[i])
+                    result = students_results[i]
+                    if Result.objects.filter(student = st, exam = exam, mark = result).exists() == False :
+                        
+                        if int(result) <= int(exam.final_mark) :
+                            res = Result.objects.get(
+                                student = st ,
+                                exam = exam,
+                            )
+
+                            res.mark = result
+
+                            res.save()
+                        
+
+            
+            return redirect('exam_results',examid)
+        
         return render(request,'exam-results.html',context)
     else:
         return render(request,'exam-results-visitro.html',context)
@@ -405,10 +417,17 @@ def exams (request) :
     return render(request,'exams.html',context)
 
 
-def student_register (request) :
+def student_register (request,teacher_uuid) :
+
+    teacher = get_object_or_404(Teacher,teacher_uuid=teacher_uuid)
+    
+    context = {
+        'teacher' : teacher,
+    }
 
     if  request.method == "POST" :
         
+
         name = request.POST['name']
         level = request.POST['level']
         parent_phone = request.POST['parent_phone']
@@ -416,17 +435,18 @@ def student_register (request) :
 
         while True :
             generated_code = random.randint(100,10000)
-            check_code = Student.objects.filter(code=generated_code)
+            check_code = Student.objects.filter(code=generated_code,teacher=teacher)
 
             if check_code.exists() is not True :
-                Student.create_student(name=name,level=level,code=generated_code,parent_phone=parent_phone)
+                Student.create_student(name=name,level=level,code=generated_code,parent_phone=parent_phone,teacher=teacher)
                 break
             
         messages.success(request,'تمت اضافتك بنجاح علي المنصة')
 
-        return redirect('student_register')
+        return redirect('student_register',teacher.teacher_uuid)
+    
 
-    return render(request,'student-register.html')
+    return render(request,'student-register.html',context)
     
     
 

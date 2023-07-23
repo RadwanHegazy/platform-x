@@ -1,9 +1,8 @@
-1 - spacefic url for student regsiterations
-	like : /student-register/<teacher_uuid>
+1 - Design Page for every teacher that's look like a portofllio to him 
 
-2 - main page for every teacher that their students can see it's results in exams
+2 - create the desing to web page
 
-3 - featch and get students by their teacher model
+3 - add link that referrer to [Students Exams, Students Details,Students Result in Exams]
 
-4 -test the website
+4 - test the website
 

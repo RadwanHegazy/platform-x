@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> اضافة طالب  </title>
+    <title> اضافة طالب | {{teacher.name}} </title>
     <link rel="stylesheet" href="{% static 'css/add-student.css' %}">
 </head>
 <body>
@@ -36,12 +36,38 @@
             font-family: Cairo,sans-serif;
             border-radius: 12px;
         }
+
+        .user {
+            width: 100%;
+            display: flex;
+            flex-direction: column-reverse;
+            overflow: hidden;
+            position: relative;
+            height: 100px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .user img {
+            width: 50px;
+            height: auto;
+        }
+
+        .user p {
+            color: #fff;
+            font-family: Cairo,sans-serif;
+        }
     </style>
     
     <img src="{% static 'images/bg.png' %}" alt="" class="bg">
 
     <form class="container" method="POST">
         
+        <div class="user">
+            <p>{{teacher.name}}</p>
+            <img src="{{teacher.image.url}}" alt="">
+        </div>
         {% csrf_token %}
 
         {% for msg in messages  %}

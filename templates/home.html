@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Home </title>
+    <title> Home | {{teacher.name}} </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
@@ -14,9 +14,9 @@
 
     <div class="up-bar">
         <div class="image">
-            <img src="{% static 'images/user.png' %}" alt="">
+            <img src="{{teacher.image.url}}" alt="">
         </div>
-        <h1>Mr.Mohammed Mansour</h1>
+        <h1>{{teacher.name}}</h1>
     </div>
 
     <div class="container">
@@ -52,7 +52,7 @@
             <div class="btns">
                 <a href="{% url 'change_password' %}" class="change-pas">تغير كلمة المرور</a>
                 <a href="{% url 'create_exam' %}" class="change-pas">الاختبارات</a>
-                <a href="{% url 'student_register' %}" class="change-pas">صفحة التسجيل</a>
+                <a href="{% url 'student_register' teacher.teacher_uuid  %}" class="change-pas">صفحة التسجيل</a>
                 <a href="{% url 'collect_marks' %}" class="change-pas">تجميع درجات</a>
             </div>
         
