@@ -13,13 +13,6 @@
     <img src="{% static 'images/bg.png' %}" alt="" class="bg">
 
 
-    <div class="share-overlay">
-        <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share"class="fa-brands fa-whatsapp"></a>
-        <a href="#" class="fa-brands fa-facebook"></a>
-        <a href="#" class="fa-brands fa-telegram"></a>
-        <a href="#" class="fas fa-copy"></a>
-        <i class="fas fa-xmark"></i>
-    </div>
 
 
     <div class="up-bar">
@@ -32,8 +25,8 @@
         <div class="teacher">
             <h1>{{teacher.name}}</h1>
             <div class="link">
-                <input type="url" value="{% url 'student' teacher.teacher_uuid %}">
-                <a class="fas fa-share-alt-square" id="share-btn"></a>
+                <input type="url" id="share-url" >
+                <a class="fas fa-copy" id="copy-btn"></a>
             </div>
         </div>
 
@@ -163,12 +156,13 @@
             })
         })
 
-        document.querySelector('#share-btn').addEventListener('click',function(){
-            document.querySelector('.share-overlay').classList.add('view')
-        })
-
-        document.querySelector('.share-overlay i').addEventListener('click',function(){
-            document.querySelector('.share-overlay').classList.remove('view')
+        var domainname = `https://${window.location.host}` + "{% url 'student' teacher.teacher_uuid %}";
+    
+        document.querySelector('#share-url').value = domainname ;
+        document.querySelector('#copy-btn').addEventListener('click',function(){
+            document.getElementById('share-url').select()
+            document.execCommand('copy')
+            alert('تم النسخ')    
         })
 
     </script>
