@@ -1,8 +1,10 @@
 
-1 - complete the student_index web page
+1 - add share url links in home page of teacher 
 
-2 - commit changes in github
+2- add on " /student-index/<teact_uuid>/ " student register btn
 
-3 - test the website
+3 - commit changes in github
+
+4 - test the website
 
  

@@ -87,6 +87,7 @@ class Month (models.Model) :
 
 
 class Exam (models.Model) :
+    teacher = models.ForeignKey(Teacher,default=None,related_name='teacher_exams',on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     level = models.CharField(max_length=100,choices=LEVELS)
     final_mark = models.IntegerField(blank=True,null=True)

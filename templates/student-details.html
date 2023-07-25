@@ -28,8 +28,18 @@
             </div>
             
             <div class="in">
-                <small>رقم ولي الامر</small>
-                <input type="text" id="parent_phone" value="{{student.parent_phone}}" readonly>
+                <small>المعلم</small>
+                <input type="text" value="{{student.teacher.name}}" readonly>
+            </div>
+            
+            <div class="in">
+                <small>المادة</small>
+                <input type="text" value="{{student.teacher.subject}}" readonly>
+            </div>
+            
+            <div class="in">
+                <small>كود الطالب</small>
+                <input type="text" id="parent_phone" value="{{student.code}}" readonly>
             </div>
 
             <div class="in">

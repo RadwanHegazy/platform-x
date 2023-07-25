@@ -12,11 +12,31 @@
     
     <img src="{% static 'images/bg.png' %}" alt="" class="bg">
 
+
+    <div class="share-overlay">
+        <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share"class="fa-brands fa-whatsapp"></a>
+        <a href="#" class="fa-brands fa-facebook"></a>
+        <a href="#" class="fa-brands fa-telegram"></a>
+        <a href="#" class="fas fa-copy"></a>
+        <i class="fas fa-xmark"></i>
+    </div>
+
+
     <div class="up-bar">
         <div class="image">
             <img src="{{teacher.image.url}}" alt="">
         </div>
-        <h1>{{teacher.name}}</h1>
+        
+        
+
+        <div class="teacher">
+            <h1>{{teacher.name}}</h1>
+            <div class="link">
+                <input type="url" value="{% url 'student' teacher.teacher_uuid %}">
+                <a class="fas fa-share-alt-square" id="share-btn"></a>
+            </div>
+        </div>
+
     </div>
 
     <div class="container">
@@ -142,6 +162,15 @@
                 document.querySelector('form').submit()
             })
         })
+
+        document.querySelector('#share-btn').addEventListener('click',function(){
+            document.querySelector('.share-overlay').classList.add('view')
+        })
+
+        document.querySelector('.share-overlay i').addEventListener('click',function(){
+            document.querySelector('.share-overlay').classList.remove('view')
+        })
+
     </script>
 
 </body>

@@ -13,56 +13,7 @@
 
     <style>
 
-        .btns {
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: space-between;
-            align-items: center;
-            gap: 25px;
-        }
 
-        .btns button, .btns a {
-            flex: 1;
-        }
-
-        .btns a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            background-color: rgb(16, 84, 211);
-            height: 100%;
-            text-decoration: none;
-            font-family: Cairo,sans-serif;
-            border-radius: 12px;
-        }
-
-        .exams {
-            width: 100%;
-            height: 300px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            direction: rtl;
-        }
-
-        .tit {
-            font-family: Cairo,sans-serif;
-            color: #fff;
-            direction: rtl;
-            text-align: right;
-        }
-
-        .exams a {
-            color: #fff;
-            text-decoration: none;
-            text-align: center;
-            padding: 1rem 1.5rem;
-            background-color: rgb(47, 141, 230);
-            direction: rtl;
-            font-family: Cairo,sans-serif;
-        }
     </style>
     
     <img src="{% static 'images/bg.png' %}" alt="" class="bg">
@@ -83,7 +34,7 @@
 
         <div class="exams">
             {% for exam in exams %}
-                <a href="{% url 'exam_results' exam.id %}"> اختبار بتاريخ : {{exam.date|date:"SHORT_DATE_FORMAT"}}</a>
+                <a href="{% url 'exam_results' exam.id exam.teacher.teacher_uuid%}"> اختبار بتاريخ : {{exam.date|date:"SHORT_DATE_FORMAT"}}</a>
             {% endfor %}
         </div>
 

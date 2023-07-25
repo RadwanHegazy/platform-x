@@ -333,11 +333,12 @@ def create_exam(request) :
     if request.method == "POST" :
         level = request.POST['level']
         final_mark = request.POST['final_mark']
+        teacher = Teacher.objects.get(user = request.user)
 
-        exam = Exam.objects.create(level=level,final_mark=final_mark)
+        exam = Exam.objects.create(level=level,final_mark=final_mark,teacher=teacher)
         exam.save()
 
-        return redirect('exam_results',exam.id)
+        return redirect('exam_results',exam.id,teacher.teacher_uuid)
 
     return render(request,'create-exam.html')
 
@@ -392,7 +393,7 @@ def exam_results (request,examid,teacher_uuid) :
                         
 
             
-            return redirect('exam_results',examid)
+            return redirect('exam_results',examid,st.teacher.teacher_uuid)
         
         return render(request,'exam-results.html',context)
     else:
@@ -411,8 +412,14 @@ def exams (request) :
 
 
     if request.method == "POST" :
+        
+        if request.user.is_authenticated :
+            teacher = Teacher.objects.get(user = request.user)
+        else :
+            teacher = Teacher.objects.get(teacher_uuid=request.POST['teacher'])
+
         context['current_level'] = request.POST['level']
-        context['exams'] = Exam.objects.filter(level = request.POST['level']).order_by('-date')
+        context['exams'] = Exam.objects.filter(level = request.POST['level'],teacher=teacher).order_by('-date')
 
     return render(request,'exams.html',context)
 
@@ -463,15 +470,16 @@ def student_result_search (request) :
     
     if request.method == "POST" :
         code = request.POST['code']
+        teacher_uuid = request.POST['teacher']
+        teacher = Teacher.objects.get(teacher_uuid = teacher_uuid)
+        student = Student.objects.filter(code = code, teacher = teacher)
 
-        student = Student.objects.filter(code = code)
-        
         if student.exists ():
             student = student.first()
             return redirect('student_details',student.student_uuid)
         else :
             messages.info(request,'لا يوجد طالب يحمل هذا الكود')
-            return redirect('student_search')
+            return redirect('student',teacher_uuid)
 
     return render(request,'student-details-search.html')
 
