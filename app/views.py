@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Student, Month, Exam, Result, LEVELS, Teacher
 import datetime
-import pandas as pd
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from Project.settings import ADMIN_URL_NAME
 
@@ -53,31 +52,6 @@ def home (request) :
 
 
     teacher = Teacher.objects.get(user=request.user)
-    # getNames = pd.read_excel('app/data.xlsx',usecols='A')
-    # getCodes = pd.read_excel('app/data.xlsx',usecols='B')
-    
-    # names = []
-    # codes = []
-
-    # for key, val in getNames.to_dict().items() :
-    #     for k, v in val.items () :
-    #         names.append(v)
-    # for key, val in getCodes.to_dict().items() :
-    #     for k, v in val.items () :
-    #         codes.append(v)
-
-    # for i in range(len(codes)) :
-
-    #     Student.create_student(
-    #         name = names[i],
-    #         code = codes[i],
-    #         level =[i[0] for i in LEVELS][0],
-    #         parent_phone = int(1009675007),
-    #     ).save()
-    
-
-    # print('Done')
-
 
     if 'delete' in request.GET :
         st = Student.objects.filter(student_uuid = request.GET['delete'])
