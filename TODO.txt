@@ -1,8 +1,8 @@
-1 - Design Page for every teacher that's look like a portofllio to him 
 
-2 - create the desing to web page
+1 - complete the student_index web page
 
-3 - add link that referrer to [Students Exams, Students Details,Students Result in Exams]
+2 - commit changes in github
 
-4 - test the website
+3 - test the website
 
+ 

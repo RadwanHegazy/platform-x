@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{ teacher.name }}  </title>
+    <link rel="stylesheet" href="{% static 'css/students-index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    
+    <div class="overlayer">
+
+        <i class="fas fa-xmark" id="close"></i>
+    
+        <div class="student-info">
+            <input type="text" placeholder="ادخل الكود الخاص بك" >
+            <button>بحث</button>
+        </div>
+
+        <div class="student-results">
+            <select name="level" id="">
+                <option value="1sec">1sec</option>
+                <option value="2sec">2sec</option>
+                <option value="3sec">3sec</option>
+            </select>
+            <button>بحث</button>
+        </div>
+
+
+
+    </div>
+
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+
+    <div class="container">
+        
+        
+        <div class="image">
+            <img src="{{teacher.image.url}}" alt="">
+            <p>{{ teacher.name }}</p>
+        </div>
+
+        <div class="links">
+            <a href="#" class="student-info">بيانات الطالب</a>
+            <a href="#" class="student-results" >نتائج الاختبارات</a>
+        </div>
+        <div class="me">
+            <p> تم الانشاء و التطوير بواسطة</p>
+            <a href="https://www.facebook.com/radwan.gaber.hijazi" target="_blank">رضوان جابر حجازي</a>
+        </div>
+
+    </div>
+
+
+
+
+    <script>
+
+        var btns = document.querySelectorAll('.container .links a');
+        var overlayer = document.querySelector('.overlayer')
+        var closeBtn = document.querySelector('#close')
+
+        btns.forEach(btn =>{
+            
+            btn.addEventListener('click',function(){
+                overlayer.classList.toggle(this.className)
+                overlayer.classList.toggle('view')
+            })
+            
+        })
+
+        closeBtn.addEventListener('click',function(){
+            overlayer.className = 'overlayer'
+        })
+
+    </script>
+
+
+</body>
+</html>

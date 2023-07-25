@@ -448,7 +448,15 @@ def student_register (request,teacher_uuid) :
 
     return render(request,'student-register.html',context)
     
-    
+
+def student_index (request,teacher_uuid) :
+    teacher = get_object_or_404(Teacher, teacher_uuid = teacher_uuid)
+
+    context = {
+        'teacher' : teacher
+    }
+
+    return render(request,'students-index.html',context)    
 
 
 def student_result_search (request) :

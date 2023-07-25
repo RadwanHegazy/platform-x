@@ -16,6 +16,7 @@ urlpatterns = [
     path('exam/<int:examid>/<str:teacher_uuid>/',views.exam_results,name='exam_results'),
     path('exams/',views.exams,name='exams'),
     path('collect-marks/',views.collect_marks,name='collect_marks'),
-    path('teacher-register/',views.teacher_register,name='teacher_register')
+    path('teacher-register/',views.teacher_register,name='teacher_register'),
+    path('student-index/<str:teacher_uuid>/',views.student_index,name='student')
 ]
 
