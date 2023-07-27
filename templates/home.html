@@ -7,10 +7,12 @@
     <title> Home | {{teacher.name}} </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/overlay.css' %}">
 </head>
 <body>
     
     <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+
 
 
 
@@ -118,37 +120,38 @@
 
     
   </table>
+  
+  
+  
+  
+  
+</div>
 
-       
-
-
-
-  </div>
-        
-        {% if students.has_other_pages %}
-        <ul class="pagination">
-          {% if students.has_previous %}
-            <li><a href="?page={{ students.previous_page_number }}">&laquo;</a></li>
-          {% else %}
-            <li class="disabled"><span>&laquo;</span></li>
-          {% endif %}
-          {% for i in students.paginator.page_range %}
-            {% if students.number == i %}
-              <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-            {% else %}
-              <li><a href="?page={{ i }}">{{ i }}</a></li>
-            {% endif %}
-          {% endfor %}
+{% if students.has_other_pages %}
+<ul class="pagination">
+    {% if students.has_previous %}
+    <li><a href="?page={{ students.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in students.paginator.page_range %}
+    {% if students.number == i %}
+    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+    {% else %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+    {% endfor %}
           {% if students.has_next %}
             <li><a href="?page={{ students.next_page_number }}">&raquo;</a></li>
-          {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
-          {% endif %}
+    {% else %}
+    <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
         </ul>
-      {% endif %}
-
+{% endif %}
+        
     </div>  
 
+    <script src="{% static 'overlay.js' %}"></script>
     <script>
         document.querySelectorAll('select').forEach( selected =>{
             selected.addEventListener('change',function(){
@@ -159,13 +162,18 @@
         var domainname = `https://${window.location.host}` + "{% url 'student' teacher.teacher_uuid %}";
     
         document.querySelector('#share-url').value = domainname ;
+        
         document.querySelector('#copy-btn').addEventListener('click',function(){
             document.getElementById('share-url').select()
             document.execCommand('copy')
             alert('تم النسخ')    
         })
 
+
+
     </script>
+
+
 
 </body>
 </html>

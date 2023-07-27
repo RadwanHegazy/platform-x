@@ -1,7 +1,14 @@
+1 - Test the website in Debug=True mode [Done]
+
+2 - create 404 page [Done]
+
+3 - change debug to False mode and custmize the system on "Debug=False" [Done]
+
+4 - test the website in Debug=False [Done]
 
 
-1 - commit changes in github
+5 - commit changes in github
 
-2 - test the website
+6 - create domain for platform-x.dis-store.website 
 
- 
+7 - clone repo to the hosting for Complete The Deployment

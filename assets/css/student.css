@@ -1,0 +1,312 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.container {
+    backdrop-filter: blur(33px);
+    width: 900px;
+    height: 500px;
+    border-radius: 50px;
+    z-index: 2;
+    box-shadow: 0px 0px 31px #00000050;
+    position: relative;
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-rows: 2fr 6fr;
+}
+
+
+.container .up {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 25px;
+}
+
+.container .up .in {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff10;
+    height: 55px;
+    padding: 0.2rem 0.4rem;
+    direction: rtl;
+}
+
+.container .up small {
+    font-size: 12px;
+    font-family: Cairo,sans-serif;
+    font-weight: bold;
+    color: #999;
+}
+
+
+.container .up input {
+    height: 100%;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    outline: none;
+    font-family: Cairo,sans-serif;
+}
+
+.container .up select {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: Cairo,sans-serif;
+    color: #fff;
+}
+
+.container .up option {
+    color: #999;
+    background-color: #555;
+}
+
+.container .edit, .container .delete {
+    width: 250px;
+    height: 55px;
+    text-decoration: none;
+    display: flex;
+    font-family: Cairo,sans-serif;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.container .edit {
+    background-color: green;
+}
+
+.container .delete {
+    background-color: crimson;
+}
+
+.container .down {
+    overflow: hidden;
+    position: relative;
+    padding-top: 15px;
+}
+
+.container .down .paid ,.container .down .marks{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+.container .down .marks {
+    display: none;
+}
+
+.paid .main ,.marks .main, .marks .add{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 50px;
+    align-items: center;
+    background-color: #ffffff20;
+    font-family: Cairo,sans-serif;
+}
+.marks .add {
+    background-color: #ffffff15;
+}
+
+/* .marks .main, .marks .add{
+    padding-left: 40px;
+} */
+
+.marks .main{
+    padding-left: 45px;
+}
+
+.marks .add input {
+    border: none;
+    outline: none;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    background-color: #ffffff10;
+    border-radius: 8px;
+}
+
+
+.paid .main p,.marks .main p,.marks .add p,.marks .add .text{
+    flex: 1;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.paid a {
+    color: rgba(0, 255, 255, 0.63);
+}
+.paid .months{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 50px;
+    align-items: center;
+    background-color: #ffffff10;
+    font-family: Cairo,sans-serif;
+}
+
+.paid .months p{
+    flex: 1;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    color: #888;
+    direction: rtl;
+}
+
+.down.marks .marks {
+    display: block;
+}
+
+.down.marks .paid {
+    display: none;
+}
+
+
+.marks button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    font-family: Cairo,sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    color: #fff;
+    background-color: green;
+    margin-left: 5px;
+    cursor: pointer;
+
+}
+
+.main.student-marks {
+    background-color: #ffffff10;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background-color: #00000090;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.overlay.view {
+    display: flex;
+}
+
+
+.overlay span {
+    width: 300px;
+    height: 100px;
+    padding: 2rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-family: Cairo,sans-serif;
+}
+
+.overlay span .btns {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btns a {
+    width: 70px;
+    color: #000;
+    text-decoration: none;
+    background-color: #9999;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btns a:first-child {
+    background-color: crimson;
+    color: #fff;
+}
+
+
+@media (max-width:900px){
+    .container {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .container .up {
+        padding: 7px;
+        justify-content: center;
+    }
+
+    .container .up .in {
+        width: 180px;
+    }
+    
+    .container .up a {
+        width: 180px;
+    }
+
+
+}
+
+@media (max-width:400px){
+
+    .container .up {
+        padding: 2px;
+        justify-content: center;
+    }
+
+    .container .up .in {
+        width: 150px;
+    }
+    
+    .container .up a {
+        width: 150px;
+    }
+
+
+}

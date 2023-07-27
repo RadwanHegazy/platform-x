@@ -1,0 +1,47 @@
+.links-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+    background-color: #00000099;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: none;
+}
+
+.links-overlay a {
+    width: 200px;
+    border-radius: 8px;
+    height: 45px;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Cairo ,sans-serif;
+    text-decoration: none;
+}
+
+.links-overlay.view {
+    display: flex;
+}
+
+.links-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 21;
+}

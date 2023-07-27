@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-hxzo6yyav&%aq-jq4oa78y@xh#b!b+ouz((se58!f!x56na5_b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1:8000','127.0.0.1']
 
 
 # Application definition
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -119,6 +120,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 
+STATIC_ROOT = 'assets'
 
 
 LOGOUT_REDIRECI_URL = 'home'
@@ -129,3 +131,4 @@ ADMIN_URL_NAME = '552005'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

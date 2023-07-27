@@ -9,7 +9,7 @@ from .models import Student, Month, Exam, Result, LEVELS, Teacher
 import datetime
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from Project.settings import ADMIN_URL_NAME
-
+import uuid
 
 
 
@@ -19,6 +19,7 @@ def teacher_register (request) :
         name = request.POST['name']
         subject = request.POST['subject']
         wa_number = request.POST['wa_number']
+
         image = ''
 
         if 'image' in request.FILES :
@@ -38,6 +39,7 @@ def teacher_register (request) :
         messages.success(request,'جاري تجهيز المنصة الخاصة بك و سيتم التواصل معك خلال 24 ساعة')
 
         return redirect('teacher_register')
+
 
     return render(request,'platform-x/teacher-register.html')
 
@@ -230,11 +232,18 @@ def change_password (request) :
         password2 = request.POST['password2']
 
         if password1 == password2 :
+            
             user = request.user
             user.set_password(password1)
             user.save()
+            
+            t = Teacher.objects.get(user=request.user)
+            t.password = password1
+            t.save()
+
             auth_login(request,user)
             return redirect('home')
+        
         else :
             context['msg'] = 'كلمة المرور غير متطابقة'
             

@@ -23,7 +23,9 @@ class Teacher(models.Model) :
     paid_at = models.DateField(null=True,blank=True)
     expired_at = models.DateField(null=True,blank=True)
     teacher_uuid = models.CharField(max_length=10000,null=True,blank=True)
-
+    username = models.CharField(max_length=1000,default='')
+    password = models.CharField(max_length=1000,default='')
+    
     def __str__(self) :
         return f'{self.name} | Paid : {self.is_paid}'
     
@@ -107,12 +109,29 @@ class Result (models.Model) :
 
 
 
+
 @receiver(post_save, sender=Teacher)
 def create_teacher_uuid(sender, instance, created, **kwargs):
     if created:
         teacher_uuid = uuid.uuid4()
         instance.teacher_uuid = teacher_uuid
         instance.wa_number = 'https://wa.me/+20' + f'{instance.wa_number}'
+        
+        username = f'user-{uuid.uuid4()}'
+        pas = str(uuid.uuid4())
+        
+        user = User.objects.create(
+            username = username,
+        )
+
+        user.set_password(pas)
+
+        user.save()
+        
+        instance.user = user
+        instance.username = username
+        instance.password = pas
+        
         instance.save()
 
 
